@@ -1,20 +1,22 @@
 from azure.identity import DefaultAzureCredential
 from azure.ai.ml import MLClient
+from azure.ai.ml.entities import AmlCompute
 from azure.ai.ml.entities import Workspace
-from azure.ai.ml.constants import WorkspaceKind
+from azure.ai.ml.entities import WorkspaceKind
 
-# Replace with your details
+
+# Put your Azure details here:
 subscription_id = "6bc62e78-9b6b-43f6-ac00-5606b77589e1"
 resource_group = "productivity-rg"
 workspace_name = "productivity-ws"
 
-# Connect using Azure credentials
+# This creates the ml_client instance — this MUST come BEFORE you use ml_client
 ml_client = MLClient(
     DefaultAzureCredential(),
     subscription_id,
-    resource_group
+    resource_group,
+    workspace_name
 )
-
 # Create a workspace
 workspace = Workspace(
     name=workspace_name,
